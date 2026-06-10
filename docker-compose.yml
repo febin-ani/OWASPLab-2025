@@ -23,7 +23,7 @@ services:
       - lab-a01-easy
 
   dashboard:
-    build: ./dashboard/backend
+    build: ./dashboard
     environment:
       - JWT_SECRET=${JWT_SECRET}
       - DB_PATH=/data/owasplab.db
