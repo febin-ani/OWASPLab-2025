@@ -21,6 +21,8 @@ services:
     depends_on:
       - dashboard
       - lab-a01-easy
+      - lab-a02-easy
+      - lab-a05-easy
 
   dashboard:
     build: ./dashboard
@@ -36,6 +38,26 @@ services:
 
   lab-a01-easy:
     build: ./labs/a01-easy
+    networks:
+      - owasplab-internal
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+          cpus: "0.5"
+
+  lab-a02-easy:
+    build: ./labs/a02-easy
+    networks:
+      - owasplab-internal
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+          cpus: "0.5"
+
+  lab-a05-easy:
+    build: ./labs/a05-easy
     networks:
       - owasplab-internal
     deploy:

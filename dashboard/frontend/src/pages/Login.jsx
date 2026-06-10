@@ -33,17 +33,29 @@ const Login = ({ setAuthUser }) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <div className="glass-card" style={{ width: '400px' }}>
-        <h2 style={{ textAlign: 'center', margin: '0 0 10px 0', color: 'var(--red-500)' }}>🔴 OWASPLab</h2>
-        <h4 style={{ textAlign: 'center', margin: '0 0 30px 0', fontWeight: 'normal' }}>Web App Security Platform</h4>
+    <div className="login-wrapper">
+      <div className="login-card">
+        <h1 className="login-logo">OWASPLab</h1>
+        <p className="login-subtitle">Web Application Security Platform</p>
 
-        {error && <div style={{ color: '#ffaaaa', marginBottom: '15px', textAlign: 'center' }}>{error}</div>}
+        {error && (
+          <div style={{ 
+            color: 'var(--rose-500)', 
+            backgroundColor: 'rgba(244, 63, 94, 0.1)', 
+            border: '1px solid rgba(244, 63, 94, 0.2)', 
+            padding: '10px', 
+            borderRadius: '6px', 
+            marginBottom: '1.5rem',
+            fontSize: '0.9rem'
+          }}>
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleLogin}>
           <input
             type="text"
-            className="glass-input"
+            className="form-input"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -51,25 +63,27 @@ const Login = ({ setAuthUser }) => {
           />
           <input
             type="password"
-            className="glass-input"
+            className="form-input"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <select
-            className="glass-input"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            style={{ appearance: 'none' }}
-          >
-            <option value="Student" style={{ color: 'black' }}>Student</option>
-            <option value="Trainer" style={{ color: 'black' }}>Trainer</option>
-            <option value="Admin" style={{ color: 'black' }}>Admin</option>
-          </select>
+          <div style={{ position: 'relative' }}>
+            <select
+              className="form-input"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              style={{ cursor: 'pointer' }}
+            >
+              <option value="Student">Student</option>
+              <option value="Trainer">Trainer</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </div>
 
-          <button type="submit" className="btn-primary" style={{ marginTop: '10px' }}>
-            Sign In ────────
+          <button type="submit" className="btn-primary" style={{ marginTop: '0.5rem' }}>
+            Sign In
           </button>
         </form>
       </div>

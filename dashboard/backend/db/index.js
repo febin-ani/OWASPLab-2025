@@ -61,6 +61,42 @@ function seedLabs() {
             });
         }
     });
+
+    // Seed A02-Easy lab
+    db.get(`SELECT id FROM labs WHERE id = ?`, ['a02-easy'], (err, row) => {
+        if (err) return console.error(err.message);
+        if (!row) {
+            db.run(`INSERT INTO labs (id, title, category, tier, description, flag) VALUES (?, ?, ?, ?, ?, ?)`,
+                ['a02-easy', 'Security Misconfiguration', 'A02', 'Easy', "Examine the application endpoints and configurations to find sensitive files leaked on the server.", 'FLAG{a02_easy_dotenv_leak}'], (err) => {
+                if (err) return console.error(err.message);
+                console.log('Seeded a02-easy lab.');
+            });
+            
+            db.run(`INSERT INTO lab_content (lab_id, hint1, hint2, hint3, walkthrough) VALUES (?, ?, ?, ?, ?)`,
+                ['a02-easy', 'Check if there are any standard developer files left in the root directory.', 'Have you looked for a .env file or debug/status endpoints?', 'Try requesting /.env or /debug on the server.', "To exploit this security misconfiguration, simply visit the server and request the /.env file directly in the URL (e.g. /labs/a02-easy/.env) or check the /debug endpoint. You will find the flag value leaked directly in the output."], (err) => {
+                if (err) return console.error(err.message);
+                console.log('Seeded a02-easy lab content.');
+            });
+        }
+    });
+
+    // Seed A05-Easy lab
+    db.get(`SELECT id FROM labs WHERE id = ?`, ['a05-easy'], (err, row) => {
+        if (err) return console.error(err.message);
+        if (!row) {
+            db.run(`INSERT INTO labs (id, title, category, tier, description, flag) VALUES (?, ?, ?, ?, ?, ?)`,
+                ['a05-easy', 'Injection', 'A05', 'Easy', "Exploit the vulnerable product search form to extract hidden data from the database.", 'FLAG{a05_easy_sql_injection_master}'], (err) => {
+                if (err) return console.error(err.message);
+                console.log('Seeded a05-easy lab.');
+            });
+            
+            db.run(`INSERT INTO lab_content (lab_id, hint1, hint2, hint3, walkthrough) VALUES (?, ?, ?, ?, ?)`,
+                ['a05-easy', 'The search parameter is directly concatenated into a SQL statement. Test for SQL injection using a single quote (\').', 'Since it\'s a UNION-based injection, you need to match the number of columns (3 columns: name, description, price).', 'Use a payload like: \' UNION SELECT flag, \'desc\', 0 FROM flags --', "1. Input a single quote (') in the search box. Notice the database syntax error (which confirms SQL Injection).\n2. Verify that there are 3 columns returned by the product query.\n3. Inject the payload:\n' UNION SELECT flag, 'flag_val', 13.37 FROM flags --\nThis will union the products query with the flags query and render the flag as one of the product cards on screen."], (err) => {
+                if (err) return console.error(err.message);
+                console.log('Seeded a05-easy lab content.');
+            });
+        }
+    });
 }
 
 module.exports = db;
