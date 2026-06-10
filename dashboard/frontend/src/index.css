@@ -1,0 +1,246 @@
+:root {
+  --red-900: #8B0000;
+  --red-700: #C0392B;
+  --red-500: #E74C3C;
+  --red-100: #FDECEA;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 80, 80, 0.25);
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: radial-gradient(ellipse at center, var(--red-900) 0%, #1A0000 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(139, 0, 0, 0.3);
+  padding: 2.5rem;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 80, 80, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  padding: 12px;
+  width: 100%;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+
+.glass-input:focus {
+  border-bottom-color: var(--red-500);
+  outline: none;
+}
+
+.btn-primary {
+  background: var(--red-700);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background: var(--red-500);
+}
+
+.btn-primary:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.page-footer {
+  color: rgba(255, 80, 80, 0.7);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+.page-footer a {
+  color: var(--red-500);
+  text-decoration: none;
+}
+
+/* Dashboard specific styles */
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex: 1;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1rem;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.lab-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.lab-category {
+  color: var(--red-500);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.lab-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.lab-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tier-badge {
+  background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.tier-badge.easy { color: #2ecc71; border: 1px solid #2ecc71; }
+.tier-badge.medium { color: #f39c12; border: 1px solid #f39c12; }
+.tier-badge.hard { color: #e74c3c; border: 1px solid #e74c3c; }
+
+.status-badge {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.status-badge.completed {
+  color: #2ecc71;
+}
+
+.status-badge.pending {
+  color: var(--text-secondary);
+}
+
+.lab-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-launch {
+  flex: 1;
+  background: var(--red-700);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-launch:hover {
+  background: var(--red-500);
+}
+
+.flag-submission {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.flag-input {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 4px;
+  color: white;
+  padding: 8px;
+  flex: 1;
+}
+
+.btn-submit {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.hints-panel {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.hint {
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}

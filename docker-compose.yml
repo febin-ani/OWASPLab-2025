@@ -1,0 +1,48 @@
+version: "3.9"
+
+networks:
+  owasplab-internal:
+    driver: bridge
+    internal: true          # No outbound internet for lab containers
+  owasplab-frontend:
+    driver: bridge
+
+services:
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "3000:3000"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - owasplab-frontend
+      - owasplab-internal
+    depends_on:
+      - dashboard
+      - lab-a01-easy
+
+  dashboard:
+    build: ./dashboard/backend
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - DB_PATH=/data/owasplab.db
+    volumes:
+      - db-data:/data
+    networks:
+      - owasplab-frontend
+    ports:
+      - "5000:5000"
+
+  lab-a01-easy:
+    build: ./labs/a01-easy
+    networks:
+      - owasplab-internal
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+          cpus: "0.5"
+
+volumes:
+  db-data:
